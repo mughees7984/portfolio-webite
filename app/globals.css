@@ -1,26 +1,71 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --chip: #eef2ff;
+  --chip-foreground: #4338ca;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #0ea5e9;
+  --glow-1: rgba(79, 70, 229, 0.14);
+  --glow-2: rgba(14, 165, 233, 0.12);
+}
+.dark {
+  --background: #0b1020;
+  --foreground: #e6eaf5;
+  --muted: #93a0b8;
+  --border: #1e2a47;
+  --card: #111a30;
+  --chip: #1a2442;
+  --chip-foreground: #a5b4fc;
+  --primary: #818cf8;
+  --primary-foreground: #0b1020;
+  --secondary: #38bdf8;
+  --glow-1: rgba(129, 140, 248, 0.18);
+  --glow-2: rgba(56, 189, 248, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-chip: var(--chip);
+  --color-chip-foreground: var(--chip-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.text-gradient {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-glow {
+  background:
+    radial-gradient(60% 50% at 15% 0%, var(--glow-1), transparent 70%),
+    radial-gradient(50% 40% at 90% 10%, var(--glow-2), transparent 70%);
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-up { animation: fade-up 0.7s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-fade-up { animation: none; }
 }
